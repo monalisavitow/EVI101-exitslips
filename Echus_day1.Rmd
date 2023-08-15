@@ -1,0 +1,319 @@
+---
+title: 'EVI101 Echus Exit Slips: Session 1 Welcome'
+author: "Jackie Ramos-Draper"
+date: "2023-08-14"
+output:
+  word_document: default
+  html_document: default
+  pdf_document: default
+---
+
+```{r echo=FALSE, message=FALSE, warning=FALSE}
+#Prep Steps:
+#1. Download data from Qualtrics (I filtered to just our section + session), and save this somewhere. It'll save as a zip, so open it to unzip before reading it into here.
+
+library(tidyverse)
+setwd("~/Desktop/Harvard/EVI101/Exit Slips/Day 1")
+echus_1 <- read_csv("Evidence exit ticket Aug 2023_August 14, 2023_17.52.csv")
+
+#remove junk 2 tops rows
+echus_1 <- echus_1[-1,]
+echus_1 <- echus_1[-1,]
+
+#reduce to just our section
+echus_1 <- echus_1 %>% filter( Q1 == "Echus (Mary Laski & Joe McIntyre)")
+
+#remove columns
+echus_1 <- echus_1 %>% select(-c(StartDate:RecordedDate, RecipientLastName:UserLanguage))
+```
+
+\ 
+\ 
+\ 
+\ 
+
+Question 1 and 2 are for section + session, so results start at Q3.
+
+\ 
+\ 
+\ 
+
+## Q3: Overall, how did class go today?  (n = 63)
+
+```{r Q3, echo=FALSE}
+echus_1$Q3 <- as.factor(echus_1$Q3)
+#table(echus_1$Q3)
+#sum(!is.na(echus_1$Q3)) #get n
+echus_1$Q3 <- factor(echus_1$Q3,                                    
+                  # Change ordering manually
+                  levels = c("Poor", "Fair", "Good", "Very good", "Excellent"))
+#table(echus_1$Q3)
+
+ggplot(data=echus_1, aes(x=Q3)) +
+  geom_bar(fill = "#66CC99") +
+  theme_minimal() + 
+  labs(title = "How did class go today?", 
+       x = "") + 
+  geom_text(stat='count', aes(label=..count..), vjust=-0.25)
+```
+
+\newpage
+
+## Q4: What went well? n=55
+```{r Q4, echo=FALSE, eval=FALSE}
+sum(!is.na(echus_1$Q4)) #right 
+head(echus_1$Q4, 55)
+```
+
+**1. Groups + Group Discussions**  
+
+* "I like the group setting and group discussion." 
+* "I really enjoyed discussing with my group members." 
+* "Opportunities for team discussion/grapples" 
+
+**2. Structure and Pace of Class**
+
+* "The timing of the class moved well, the teaching team sounds great, and I was comforted that the goal was exposure not mastery!"
+* "The mix of professors talking and us participating with groups, setting norms with groups, encouragement of discussions across groups"
+* "Love the working in teams format. Energy from professors is appreciated as well."
+* "Folks voiced out contrasting opinions and the instructors addressed them properly"
+* "The break of examples and group[work]"
+* "Active team engagement, lots of time for group interaction"
+
+**3. Instructors**
+
+* "Joe and Mary are really personable and clearly committed to creating a positive class culture." 
+* "I love the personality that the instructors bring-- I can see the intentionality behind creating community. I appreciate that the values of the course and instructors are clear (rigor and kindness)"
+* "I love the opening and sharing pics from Instructor and TFs. I love the team discussion."
+
+\newpage
+
+## Q5: What could we improve? (n=43)
+```{r Q5, echo=FALSE, eval=FALSE}
+sum(!is.na(echus_1$Q5)) #43 out of 62 people responded 
+head(echus_1$Q5, 43)
+```
+
+**1. Timing for Team Discussions**
+
+* "[Provide] timeframe for discussing questions"
+* "We might need a little more time for team discussion"
+* "Would like to have more time for the tRAT. I felt like 5 minutes is too short to be able to gather opinions from everyone while also organizing everyone to get on the Canvas site, divide roles and also articulate their opinions."                                                                         
+                                    
+**2. Instruction Insights**
+
+* "It takes me longer than the rest of my peers to process the information since my first language is not English."
+* "more specific and detailed information about the concepts, utilizing examples or non-examples"
+* "Maybe a bit more feedback with explaining why some answers are “wrong”"
+* "Afternoon class is a little tough… the instructors are awesome but it is hard to keep focus in the afternoon. As many team activities, debates, or practical assignments or hands on things we can do will definitely help."
+* "It would be exciting to have questions that are more 'debateable.' Today's iRat/tRat questions very clearly had a right/wrong answer and I think the best questions for discussion are the ones that are more open-ended."
+* "Since it is in the afternoon, having a little more energy in the class may be helpful for engagement."
+
+* "My group was a little confused about what to do for the tRat, but then we eventually figured out we're supposed to discuss it together. Maybe the instructions for the tRAT could be a little more explicit? But my confusion also could've been because I slept at 3 this morning haha. Thank you for class!"
+                                                                                                                              
+
+**3. Pace in Lecture**
+
+* "I found that the lecture is quite fast speaking wise. I would really appreciate if the speaking is a little bit slower to help with understanding. Thank you so much for your help regarding this."   
+* "A little more time for discussion. Felt a bit rushed."   
+* "It went a bit fast sometimes. Especially with the iRATs where it could have been synthetic or descriptive qualitative, or process / causal evidence. I personally got both wrong (synthetic and causal), but I was close in terms of the reasoning. I am still not fully clear on what I was missing."         
+
+
+**4. Operations** 
+
+* "It would be better if Professors can turn up the mac ( sometimes it is hard to hear clearly when sitting at the back of the classroom"   
+* "maybe some songs while we are working with our teams"  
+* "I think all of the non-Evidence terms (e.g. section names, team names) are not very clear as to what the value is and introduce a large - and potentially unnecessary - cognitive load. I also think Day 1 of Evidence was largely repetitive of the pre-course work."  
+* "I would recommend moving the podium and the speakers point away from the entry/exit area, as it can be distracting when people need to step out. Also, it may hinder people from leaving when they need to because they would have to cross the speaker in order to enter/exit."                                
+
+```{r echo=FALSE, eval=FALSE}
+echus_temp <- echus_1 %>% filter(Q3 == "Fair")
+echus_temp$Q5
+```
+*Student who rated class as "Fair" for Q3 said this for Q5: "It would be better if Professors can turn up the mac ( sometimes it is hard to hear clearly when sitting at the back of the classroom"*
+
+
+\newpage
+
+## Q6: Is your team working well together? (n = 63)  
+
+```{r Q6, echo=F}
+#echus_1$Q6 <- as.factor(echus_1$Q6)
+#sum(!is.na(echus_1$Q6)) #get n
+
+
+ggplot(data=echus_1, aes(x=Q6, fill = Q6)) +
+  geom_bar() +
+  theme_minimal() + 
+  labs(title = "Is your team working well together?", 
+       x = "") + 
+  geom_text(stat='count', aes(label=..count..), vjust=-0.25)
+
+```
+
+## Q7: If you'd like a member of the teaching team to reach out to help with your team's dynamics, please add your full name here. 
+```{r, echo=FALSE}
+echus7 <- echus_1 %>% filter(Q7 !="")
+head(echus7$Q7)
+```
+
+\newpage
+
+# Appendix 
+```{r Q4: nlp, echo=FALSE, eval=FALSE}
+#NLP
+require(quanteda)
+require(ggplot2)
+require(stm)
+require(tidyverse)
+require(geomtextpath)
+require(quanteda.textstats)
+require(udpipe)
+
+echus4 <- echus_1 %>% filter(Q4 !="")
+
+corpus_evi <- corpus(x = echus4$Q4, 
+                     docnames = echus4$ResponseId)
+
+
+dfm <- corpus_evi %>%
+  tokens(remove_punct = TRUE,  #remove punctuation
+         remove_numbers = TRUE, #remove any numbers --- maybe not the best move if they put a cost 
+         remove_symbols = TRUE) %>% # remove uninformative tokens
+  tokens_tolower(keep_acronyms = T) %>% # casefold tokens, keep acronyms
+  tokens_remove(c(stopwords("en"), "really", "like", "love", "lots", "can", "appreciate", "well", "loved", "great", "enjoyed", "got", "get", "good", "getting", "feel")) %>% #remove common stopwords in English
+  #tokens_wordstem() %>% # ADDED THIS
+  dfm()
+
+
+toks.df <- textstat_frequency(dfm)
+toks.df
+
+#setwd("~/Desktop")
+#ud_model <- udpipe_load_model("english-ewt-ud-2.3-181115.udpipe")
+# phrase.toks <- udpipe_annotate(object = ud_model, 
+#                         x = echus4$Q4)
+
+setwd("~/Desktop/Harvard/EVI101/Exit Slips/Day 1")
+#phrase.toks <- as.data.frame(phrase.toks)
+#head(phrase.toks[,c("token", "upos")],20)
+#relevant.pos <- c("NOUN","PROPN","VERB","ADJ","SYM") 
+#filter.condition <- phrase.toks$upos %in% relevant.pos
+
+# key.phrases.0 <- keywords_rake(x = phrase.toks,
+#                              term = "token", 
+#                              group = "doc_id",
+#                              relevant = filter.condition,
+#                              ngram_max = 2, 
+#                              n_min = 2) 
+
+#head(key.phrases.0, 50) #not super useful list, so i'll only reprocess for wordstem 
+
+dfm <- corpus_evi %>%
+  tokens(remove_punct = TRUE,  #remove punctuation
+         remove_numbers = TRUE, #remove any numbers --- maybe not the best move if they put a cost 
+         remove_symbols = TRUE) %>% # remove uninformative tokens
+  tokens_tolower(keep_acronyms = T) %>% # casefold tokens, keep acronyms
+  tokens_remove(c(stopwords("en"), "really", "like", "love", "lots", "can", "appreciate", "well", "loved", "great", "enjoyed", "got", "get", "good", "getting", "feel", "know")) %>% #remove common stopwords in English that you're seeing 
+  tokens_wordstem() %>% # ADDED THIS
+  dfm()
+
+
+
+#convert dfm to stm object
+tm.dfm <- convert(dfm, to = "stm" )
+
+class(tm.dfm)
+names(tm.dfm)
+
+#k results
+kresult <- searchK(tm.dfm$documents, tm.dfm$vocab, K = c(3:16)) 
+plot(kresult) #looking for lower HOL, higher SC --  6? 10?
+
+mod <- stm(documents = tm.dfm$documents, 
+                   vocab = tm.dfm$vocab,
+                   K = 4) 
+#^ confirms qual number of topics
+
+plot(x = mod, 
+     topics = 1:4,
+     type = "summary",
+     labeltype = "prob",
+     main = "prob")
+
+plot(x = mod, 
+     topics = 1:4,
+     type = "summary",
+     labeltype = "frex",
+     main = "frex")
+
+
+#Label Topics
+labelTopics(model = mod, topics = 1, n = 10)
+labelTopics(model = mod, topics = 2, n = 10) 
+labelTopics(model = mod, topics = 3, n = 10)
+labelTopics(model = mod, topics = 4, n = 10) 
+
+findThoughts(model = mod,
+             texts = echus4$Q4,
+             topics = 1,
+             n = 10)
+
+findThoughts(model = mod,
+             texts = echus4$Q4,
+             topics = 2,
+             n = 10)
+
+findThoughts(model = mod,
+             texts = echus4$Q4,
+             topics = 3,
+             n = 10)
+
+findThoughts(model = mod,
+             texts = echus4$Q4,
+             topics = 4,
+             n = 10)
+
+#plotting topic highest words
+library(tidytext)
+word_topics <- tidy(mod, matrix = "beta")
+class(word_topics)
+names(word_topics)
+
+word_topics %>% 
+  group_by(topic) %>% 
+  slice_max(beta, n = 10) %>% 
+  ungroup() %>% 
+  mutate(topic = paste("Topic", topic)) %>% 
+  ggplot(aes(beta, reorder_within(term, beta, topic), fill = topic)) +
+  geom_col(show.legend = F) +
+  facet_wrap(vars(topic), scales = "free_y") +
+  scale_x_continuous( expand = c(0,0)) + 
+  scale_y_reordered() +
+  labs(x = expression(beta), y = NULL,
+       title = "Highest probability words by topic") 
+
+#go in manually to say group = team
+
+```
+
+```{r echo=FALSE}
+library(knitr)
+opts_chunk$set(tidy.opts=list(width.cutoff=80),tidy=TRUE)
+```
+
+**Q4: What went well?**  
+```{r Q4 all responses, echo=FALSE}
+#sum(!is.na(echus_1$Q4))
+echus4 <- echus_1 %>% filter(Q4 !="")
+head(echus4$Q4, 55)
+```
+
+\newpage
+
+**Q5: What could we improve?**
+```{r Q5 all responses, tidy=TRUE, tidy.opts=list(width.cutoff=60), echo=FALSE}
+#sum(!is.na(echus_1$Q5))
+echus5 <- echus_1 %>% filter(Q5 !="")
+head(echus5$Q5, 43)
+```
