@@ -21,7 +21,7 @@ echus_1 <- echus_1[-1,]
 echus_1 <- echus_1[-1,]
 
 #reduce to just our section
-echus_1 <- echus_1 %>% filter( Q1 == "Echus (Mary Laski & Joe McIntyre)")
+echus_1 <- echus_1 %>% filter( Q1 == "Echus (---)")
 
 #remove columns
 echus_1 <- echus_1 %>% select(-c(StartDate:RecordedDate, RecipientLastName:UserLanguage))
@@ -67,24 +67,18 @@ head(echus_1$Q4, 55)
 
 **1. Groups + Group Discussions**  
 
-* "I like the group setting and group discussion." 
-* "I really enjoyed discussing with my group members." 
-* "Opportunities for team discussion/grapples" 
+[insert sample responses]
+
 
 **2. Structure and Pace of Class**
 
-* "The timing of the class moved well, the teaching team sounds great, and I was comforted that the goal was exposure not mastery!"
-* "The mix of professors talking and us participating with groups, setting norms with groups, encouragement of discussions across groups"
-* "Love the working in teams format. Energy from professors is appreciated as well."
-* "Folks voiced out contrasting opinions and the instructors addressed them properly"
-* "The break of examples and group[work]"
-* "Active team engagement, lots of time for group interaction"
+[insert sample responses]
+
 
 **3. Instructors**
 
-* "Joe and Mary are really personable and clearly committed to creating a positive class culture." 
-* "I love the personality that the instructors bring-- I can see the intentionality behind creating community. I appreciate that the values of the course and instructors are clear (rigor and kindness)"
-* "I love the opening and sharing pics from Instructor and TFs. I love the team discussion."
+[insert sample responses]
+
 
 \newpage
 
@@ -96,41 +90,29 @@ head(echus_1$Q5, 43)
 
 **1. Timing for Team Discussions**
 
-* "[Provide] timeframe for discussing questions"
-* "We might need a little more time for team discussion"
-* "Would like to have more time for the tRAT. I felt like 5 minutes is too short to be able to gather opinions from everyone while also organizing everyone to get on the Canvas site, divide roles and also articulate their opinions."                                                                         
+[insert sample responses]
+                                                                         
                                     
 **2. Instruction Insights**
 
-* "It takes me longer than the rest of my peers to process the information since my first language is not English."
-* "more specific and detailed information about the concepts, utilizing examples or non-examples"
-* "Maybe a bit more feedback with explaining why some answers are “wrong”"
-* "Afternoon class is a little tough… the instructors are awesome but it is hard to keep focus in the afternoon. As many team activities, debates, or practical assignments or hands on things we can do will definitely help."
-* "It would be exciting to have questions that are more 'debateable.' Today's iRat/tRat questions very clearly had a right/wrong answer and I think the best questions for discussion are the ones that are more open-ended."
-* "Since it is in the afternoon, having a little more energy in the class may be helpful for engagement."
+[insert sample responses]
 
-* "My group was a little confused about what to do for the tRat, but then we eventually figured out we're supposed to discuss it together. Maybe the instructions for the tRAT could be a little more explicit? But my confusion also could've been because I slept at 3 this morning haha. Thank you for class!"
                                                                                                                               
 
 **3. Pace in Lecture**
 
-* "I found that the lecture is quite fast speaking wise. I would really appreciate if the speaking is a little bit slower to help with understanding. Thank you so much for your help regarding this."   
-* "A little more time for discussion. Felt a bit rushed."   
-* "It went a bit fast sometimes. Especially with the iRATs where it could have been synthetic or descriptive qualitative, or process / causal evidence. I personally got both wrong (synthetic and causal), but I was close in terms of the reasoning. I am still not fully clear on what I was missing."         
+[insert sample responses]
+         
 
 
 **4. Operations** 
-
-* "It would be better if Professors can turn up the mac ( sometimes it is hard to hear clearly when sitting at the back of the classroom"   
-* "maybe some songs while we are working with our teams"  
-* "I think all of the non-Evidence terms (e.g. section names, team names) are not very clear as to what the value is and introduce a large - and potentially unnecessary - cognitive load. I also think Day 1 of Evidence was largely repetitive of the pre-course work."  
-* "I would recommend moving the podium and the speakers point away from the entry/exit area, as it can be distracting when people need to step out. Also, it may hinder people from leaving when they need to because they would have to cross the speaker in order to enter/exit."                                
+[insert sample responses]
 
 ```{r echo=FALSE, eval=FALSE}
 echus_temp <- echus_1 %>% filter(Q3 == "Fair")
 echus_temp$Q5
 ```
-*Student who rated class as "Fair" for Q3 said this for Q5: "It would be better if Professors can turn up the mac ( sometimes it is hard to hear clearly when sitting at the back of the classroom"*
+*Student who rated class as "Fair" for Q3 said this for Q5: [insert sample responses]*
 
 
 \newpage
@@ -317,3 +299,4 @@ head(echus4$Q4, 55)
 echus5 <- echus_1 %>% filter(Q5 !="")
 head(echus5$Q5, 43)
 ```
+
