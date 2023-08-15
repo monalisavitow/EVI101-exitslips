@@ -1,0 +1,165 @@
+---
+title: 'EVI101 Echus Exit Slips: Session 1 Welcome'
+author: "Jackie Ramos-Draper"
+date: "2023-08-14"
+output:
+  word_document: default
+  html_document: default
+  pdf_document: default 
+---
+
+```{r echo=FALSE, message=FALSE, warning=FALSE}
+#Prep Steps:
+#1. Download data from Qualtrics (I filtered to just our section + session), and save this somewhere. It'll save as a zip, so open it to unzip before reading it into here.
+
+library(tidyverse)
+setwd("[insert your wd for data]")
+echus_1 <- read_csv("[csv file name for qualtrics data]")
+
+#remove junk 2 tops rows
+echus_1 <- echus_1[-1,]
+echus_1 <- echus_1[-1,]
+
+#reduce to just our section
+echus_1 <- echus_1 %>% filter( Q1 == "Echus (---)")
+
+#remove columns
+echus_1 <- echus_1 %>% select(-c(StartDate:RecordedDate, RecipientLastName:UserLanguage))
+```
+
+\ 
+\ 
+\ 
+\ 
+
+Question 1 and 2 are for section + session, so results start at Q3.
+
+\ 
+\ 
+\ 
+
+## Q3: Overall, how did class go today?  (n = 63)
+
+```{r Q3, echo=FALSE}
+echus_1$Q3 <- as.factor(echus_1$Q3)
+#table(echus_1$Q3)
+#sum(!is.na(echus_1$Q3)) #get n
+echus_1$Q3 <- factor(echus_1$Q3,                                    
+                  # Change ordering manually
+                  levels = c("Poor", "Fair", "Good", "Very good", "Excellent"))
+#table(echus_1$Q3)
+
+ggplot(data=echus_1, aes(x=Q3)) +
+  geom_bar(fill = "#66CC99") +
+  theme_minimal() + 
+  labs(title = "How did class go today?", 
+       x = "") + 
+  geom_text(stat='count', aes(label=..count..), vjust=-0.25)
+```
+
+\newpage
+
+## Q4: What went well? n=55
+```{r Q4, echo=FALSE, eval=FALSE}
+sum(!is.na(echus_1$Q4)) #right 
+head(echus_1$Q4, 55)
+```
+
+**1. Groups + Group Discussions**  
+
+[insert sample responses]
+
+
+**2. Structure and Pace of Class**
+
+[insert sample responses]
+
+
+**3. Instructors**
+
+[insert sample responses]
+
+
+\newpage
+
+## Q5: What could we improve? (n=43)
+```{r Q5, echo=FALSE, eval=FALSE}
+sum(!is.na(echus_1$Q5)) #43 out of 62 people responded 
+head(echus_1$Q5, 43)
+```
+
+**1. Timing for Team Discussions**
+
+[insert sample responses]
+                                                                         
+                                    
+**2. Instruction Insights**
+
+[insert sample responses]
+
+                                                                                                                              
+
+**3. Pace in Lecture**
+
+[insert sample responses]
+         
+
+
+**4. Operations** 
+[insert sample responses]
+
+```{r echo=FALSE, eval=FALSE}
+echus_temp <- echus_1 %>% filter(Q3 == "Fair")
+echus_temp$Q5
+```
+*Student who rated class as "Fair" for Q3 said this for Q5: [insert sample responses]*
+
+
+\newpage
+
+## Q6: Is your team working well together? (n = 63)  
+
+```{r Q6, echo=F}
+#echus_1$Q6 <- as.factor(echus_1$Q6)
+#sum(!is.na(echus_1$Q6)) #get n
+
+
+ggplot(data=echus_1, aes(x=Q6, fill = Q6)) +
+  geom_bar() +
+  theme_minimal() + 
+  labs(title = "Is your team working well together?", 
+       x = "") + 
+  geom_text(stat='count', aes(label=..count..), vjust=-0.25)
+
+```
+
+## Q7: If you'd like a member of the teaching team to reach out to help with your team's dynamics, please add your full name here. 
+```{r, echo=FALSE}
+echus7 <- echus_1 %>% filter(Q7 !="")
+head(echus7$Q7)
+```
+
+\newpage
+
+# Appendix 
+
+```{r echo=FALSE}
+library(knitr)
+opts_chunk$set(tidy.opts=list(width.cutoff=80),tidy=TRUE)
+```
+
+**Q4: What went well?**  
+```{r Q4 all responses, echo=FALSE}
+#sum(!is.na(echus_1$Q4))
+echus4 <- echus_1 %>% filter(Q4 !="")
+head(echus4$Q4, 55)
+```
+
+\newpage
+
+**Q5: What could we improve?**
+```{r Q5 all responses, tidy=TRUE, tidy.opts=list(width.cutoff=60), echo=FALSE}
+#sum(!is.na(echus_1$Q5))
+echus5 <- echus_1 %>% filter(Q5 !="")
+head(echus5$Q5, 43)
+```
